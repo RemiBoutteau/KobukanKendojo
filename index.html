@@ -153,6 +153,22 @@
         </div> <!-- Fin de div ligne-->
 
 
+            <!-- Galerie (rotation d'une seule image) -->
+        <div class="container mt-5" id="galerie">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <h2>Galerie photos</h2>
+                </div>
+                <div class="col-12 col-md-10 col-lg-8">
+                    <div class="rotating-gallery">
+                        <img id="rotating-gallery-img" src="images/galerie/20250618_212758(1).jpg" alt="Galerie - 20250618_212758" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
         <div class="container mt-4">
             <div class="row">
                 <div class="col-md-6">
@@ -177,8 +193,9 @@
             </div>
         </div> <!-- Fin de div ligne-->
 
+    
 
-    <!-- Les partenaires -->
+        <!-- Les partenaires -->
      <div class="row">
         <h2>Nos partenaires </h2>
         <div class="col-6 col-md-2"><a href="https://erhyg.fr/" target="_blank"><img src="images/erhyg.png" alt="ERHYG" width="100"></a></div>
@@ -209,6 +226,54 @@
     <!-- Inclusion des scripts  -->
     <!-- Bootsrap 5 bundle -->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>    <!-- jQquery -->
+   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const galleryImages = [
+            'images/galerie/20250618_212758(1).jpg',
+            'images/galerie/DSC_5155.jpg',
+            'images/galerie/DSC_5266.jpg',
+            'images/galerie/DSC_5400.jpg',
+            'images/galerie/DSC_5402.jpg',
+            'images/galerie/DSC_5437.jpg',
+            'images/galerie/DSC_6139.JPG',
+            'images/galerie/DSC_6581.JPG',
+            'images/galerie/DSC_6682.JPG',
+            'images/galerie/DSC_6696.JPG',
+            'images/galerie/DSC_6781.JPG',
+            'images/galerie/DSC_6797.JPG',
+            'images/galerie/DSC_7343.JPG',
+            'images/galerie/DSC_7510.JPG',
+            'images/galerie/DSC_7561 (1).JPG',
+            'images/galerie/IMG_0603.jpg',
+            'images/galerie/IMG_0604.jpg',
+            'images/galerie/IMG_0636.jpg',
+            'images/galerie/IMG_0652.jpg',
+            'images/galerie/IMG_0675-2.jpg',
+            'images/galerie/IMG_0677.jpg',
+            'images/galerie/IMG_8060.JPG',
+            'images/galerie/IMG_8067.JPG'
+        ];
+
+        const img = document.getElementById('rotating-gallery-img');
+        const altFromPath = (path) => `Galerie - ${path.split('/').pop()}`;
+        let index = 0;
+
+        if (!img || galleryImages.length === 0) return;
+
+        const showNext = () => {
+            img.classList.add('is-fading');
+            setTimeout(() => {
+                index = (index + 1) % galleryImages.length;
+                const nextSrc = galleryImages[index];
+                img.src = nextSrc;
+                img.alt = altFromPath(nextSrc);
+                img.classList.remove('is-fading');
+            }, 320);
+        };
+
+        setInterval(showNext, 3500);
+    });
+   </script>
    
 </body>
 </html>
