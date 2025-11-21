@@ -13,3 +13,13 @@
   filter: invert(1);
 }
 
+/* Centre verticalement le contenu dans chaque ligne du layout */
+.row {
+  align-items: center;
+  text-align: center;
+}
+
+/* Titres principaux */
+h2 {
+  color: #e00000;
+}
