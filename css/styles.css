@@ -1,5 +1,7 @@
 
 .navbar .nav-link {
+  font-family: 'Zen Kurenaido', sans-serif;
+  font-weight: 700;
   color: #e00000;
 }
 
@@ -22,4 +24,29 @@
 /* Titres principaux */
 h2 {
   color: #e00000;
+  font-family: 'Zen Kurenaido', sans-serif;
+  font-weight: 700;
+  animation: textFadeUp 0.8s ease-out both;
+}
+
+
+body {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+/* Effet animé doux sur les paragraphes */
+p {
+  animation: textFadeUp 0.9s ease-out both;
+}
+
+/* Animation de montée/fondu */
+@keyframes textFadeUp {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
