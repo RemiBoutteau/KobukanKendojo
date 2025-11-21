@@ -1,0 +1,15 @@
+
+.navbar .nav-link {
+  color: #e00000;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus,
+.navbar .nav-link.active {
+  color: #ff3b3b;
+}
+
+.navbar .navbar-toggler-icon {
+  filter: invert(1);
+}
+
