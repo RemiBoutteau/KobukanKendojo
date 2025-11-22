@@ -1,14 +1,14 @@
-
+﻿
 .navbar .nav-link {
   font-family: 'Zen Kurenaido', sans-serif;
   font-weight: 700;
-  color: #e00000;
+  color: #a30f0d;
 }
 
 .navbar .nav-link:hover,
 .navbar .nav-link:focus,
 .navbar .nav-link.active {
-  color: #ff3b3b;
+  color: white;
 }
 
 .navbar .navbar-toggler-icon {
@@ -21,9 +21,21 @@
   text-align: center;
 }
 
+
+
+
 /* Titres principaux */
+h1 {
+  color: #a30f0d;
+  font-family: 'Zen Kurenaido', sans-serif;
+  font-weight: 700;
+  animation: textFadeUp 0.8s ease-out both;
+}
+
+
+
 h2 {
-  color: #e00000;
+  color: #a30f0d;
   font-family: 'Zen Kurenaido', sans-serif;
   font-weight: 700;
   animation: textFadeUp 0.8s ease-out both;
@@ -76,4 +88,12 @@ p {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+#logo,
+#kitsune {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
 }
