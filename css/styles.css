@@ -126,3 +126,11 @@ p {
   height: 100%;
   border: 0;
 }
+
+/* Calendar embed: use a class on the iframe instead of inline styles */
+.calendar-embed {
+  display: block;
+  width: 100%;
+  border: 0;
+  overflow: hidden;
+}
