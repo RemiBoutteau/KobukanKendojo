@@ -24,6 +24,10 @@
 
 
 
+.partners {
+  margin-top: 2rem;
+}
+
 /* Partners logos: constrain size and center them */
 .partners img {
   max-width: 100px;
