@@ -24,6 +24,22 @@
 
 
 
+/* Partners logos: constrain size and center them */
+.partners img {
+  max-width: 100px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 992px) {
+  /* on larger screens allow slightly bigger logos */
+  .partners img {
+    max-width: 120px;
+  }
+}
 /* Titres principaux */
 h1 {
   color: #a30f0d;
