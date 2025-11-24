@@ -138,3 +138,13 @@ p {
   border: 0;
   overflow: hidden;
 }
+
+/* Actualités: center heading and Facebook widget container */
+.actualites h2 {
+  text-align: center;
+}
+.actualites .fb-page {
+  margin: 0 auto;
+  display: block;
+  max-width: 500px; /* respect FB plugin width but keep responsive */
+}
