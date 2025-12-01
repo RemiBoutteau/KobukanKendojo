@@ -121,7 +121,7 @@ p {
 .map-embed {
   width: 100%;
   max-width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -147,5 +147,22 @@ p {
   margin: 0 auto;
   display: block;
   max-width: 500px; /* respect FB plugin width but keep responsive */
+}
+
+/* Unified styling for all illustrations: images, videos, maps, gallery */
+/*.site-content img,
+.ratio iframe,
+.map-embed iframe,
+.calendar-embed {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}*/
+.imagerounded{
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+/* Ensure rotating gallery keeps its more prominent shadow */
+.rotating-gallery {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2) !important;
 }
 
