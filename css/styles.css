@@ -69,6 +69,8 @@ body {
 .rotating-gallery {
   position: relative;
   overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
   background: radial-gradient(circle at 20% 20%, rgba(224, 0, 0, 0.12), transparent 45%),
               radial-gradient(circle at 80% 30%, rgba(255, 59, 59, 0.12), transparent 40%),
               #0f0f0f;
@@ -119,6 +121,7 @@ p {
 .map-embed {
   width: 100%;
   max-width: 100%;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -144,21 +147,22 @@ p {
   margin: 0 auto;
   display: block;
   max-width: 500px; /* respect FB plugin width but keep responsive */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Unified styling for all illustrations: images, videos, maps, gallery */
 .ratio iframe,
 .map-embed iframe,
-.calendar-embed
-.imagerounded
+.calendar-embed,
+.imagerounded,
 .rotating-gallery {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Ensure rotating gallery keeps its more prominent shadow */
-/*.rotating-gallery {
+.rotating-gallery {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2) !important;
 }
 
-*/
