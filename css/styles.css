@@ -150,19 +150,18 @@ p {
 }
 
 /* Unified styling for all illustrations: images, videos, maps, gallery */
-/*.site-content img,
 .ratio iframe,
 .map-embed iframe,
-.calendar-embed {
+.calendar-embed
+.imagerounded
+.rotating-gallery {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}*/
-.imagerounded{
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
 /* Ensure rotating gallery keeps its more prominent shadow */
-.rotating-gallery {
+/*.rotating-gallery {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2) !important;
 }
 
+*/
