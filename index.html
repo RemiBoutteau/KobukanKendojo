@@ -309,35 +309,14 @@
     <!-- Bootsrap 5 bundle -->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>    <!-- jQquery -->
    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const galleryImages = [
-            'images/galerie/image (1).jpg',
-            'images/galerie/image (2).jpg',
-            'images/galerie/image (3).jpg',
-            'images/galerie/image (4).jpg',
-            'images/galerie/image (5).jpg',
-            'images/galerie/image (6).jpg',
-            'images/galerie/image (7).jpg',
-            'images/galerie/image (8).jpg',
-            'images/galerie/image (9).jpg',
-            'images/galerie/image (10).jpg',
-            'images/galerie/image (11).jpg',
-            'images/galerie/image (12).jpg',
-            'images/galerie/image (13).jpg',
-            'images/galerie/image (14).jpg',
-            'images/galerie/image (15).jpg',
-            'images/galerie/image (16).jpg',
-            'images/galerie/image (17).jpg',
-            'images/galerie/image (18).jpg',
-            'images/galerie/image (19).jpg',
-            'images/galerie/image (20).jpg',
-            'images/galerie/image (21).jpg',
-            'images/galerie/image (22).jpg',
-            'images/galerie/image (23).jpg'
-          
-        ];
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Automatically detect all numbered images in the gallery directory
+        // Pattern: images/galerie/image (1).jpg, image (2).jpg, ...
+        const maxScan = 500; // safety cap to avoid infinite loop
+        const exts = ['.jpg', '.JPG', '.jpeg', '.png', '.webp'];
+        const stopAfterConsecutiveMisses = 12; // stop early when many sequential indices are missing
 
-        // Shuffle function: randomize the order of images
+        // Fisher-Yates shuffle
         const shuffle = (arr) => {
             for (let i = arr.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -346,7 +325,37 @@
             return arr;
         };
 
-        // Randomize the gallery images on each page load
+        const collectAllImages = async () => {
+            const images = [];
+            let consecutiveMisses = 0;
+            for (let i = 1; i <= maxScan && consecutiveMisses < stopAfterConsecutiveMisses; i++) {
+                let found = false;
+                for (const ext of exts) {
+                    const path = `images/galerie/image (${i})${ext}`;
+                    const ok = await new Promise((resolve) => {
+                        const im = new Image();
+                        im.onload = () => resolve(true);
+                        im.onerror = () => resolve(false);
+                        im.src = path;
+                    });
+                    if (ok) {
+                        images.push(path);
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) {
+                    consecutiveMisses = 0;
+                } else {
+                    consecutiveMisses++;
+                }
+            }
+            return images;
+        };
+
+        const galleryImages = await collectAllImages();
+        if (!galleryImages || galleryImages.length === 0) return;
+
         shuffle(galleryImages);
 
         const img = document.getElementById('rotating-gallery-img');
@@ -354,6 +363,10 @@
         let index = 0;
 
         if (!img || galleryImages.length === 0) return;
+
+        // initialize first image
+        img.src = galleryImages[0];
+        img.alt = altFromPath(galleryImages[0]);
 
         const showNext = () => {
             img.classList.add('is-fading');
