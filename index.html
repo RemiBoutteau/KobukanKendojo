@@ -337,6 +337,18 @@
           
         ];
 
+        // Shuffle function: randomize the order of images
+        const shuffle = (arr) => {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        };
+
+        // Randomize the gallery images on each page load
+        shuffle(galleryImages);
+
         const img = document.getElementById('rotating-gallery-img');
         const altFromPath = (path) => `Galerie - ${path.split('/').pop()}`;
         let index = 0;
