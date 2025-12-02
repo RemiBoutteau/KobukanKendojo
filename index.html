@@ -334,7 +334,7 @@
         if (!img || galleryImages.length === 0) return;
 
         // Preload with timeout and return success/failure
-        const preloadWithTimeout = (src, timeout = 1500) => new Promise((resolve) => {
+        const preloadWithTimeout = (src, timeout = 2500) => new Promise((resolve) => {
             const im = new Image();
             let done = false;
             const t = setTimeout(() => { if (!done) { done = true; resolve({ src, ok: false, reason: 'timeout' }); } }, timeout);
