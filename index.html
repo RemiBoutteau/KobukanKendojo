@@ -337,22 +337,69 @@
 
         if (!img || galleryImages.length === 0) return;
 
-        // initialize first image
-        img.src = galleryImages[0];
-        img.alt = altFromPath(galleryImages[0]);
+        // Preload images (create Image objects). We won't wait for all of them,
+        // but we will try to decode the first before starting rotation.
+        const preloaded = galleryImages.map((src) => {
+            const im = new Image();
+            im.src = src;
+            return im;
+        });
 
-        const showNext = () => {
-            img.classList.add('is-fading');
-            setTimeout(() => {
-                index = (index + 1) % galleryImages.length;
-                const nextSrc = galleryImages[index];
+        const startRotation = () => {
+            // initialize first image (use preloaded[0] if available)
+            img.src = preloaded[0] && preloaded[0].src ? preloaded[0].src : galleryImages[0];
+            img.alt = altFromPath(img.src);
+
+            const showNext = async () => {
+                img.classList.add('is-fading');
+                index = (index + 1) % preloaded.length;
+                const nextSrc = preloaded[index] ? preloaded[index].src : galleryImages[index];
                 img.src = nextSrc;
                 img.alt = altFromPath(nextSrc);
+
+                // Wait for the browser to decode the new image (with a timeout fallback)
+                try {
+                    if (img.decode) {
+                        await Promise.race([
+                            img.decode(),
+                            new Promise((r) => setTimeout(r, 700))
+                        ]);
+                    } else {
+                        // fallback: small delay to give browser a moment to paint
+                        await new Promise((r) => setTimeout(r, 500));
+                    }
+                } catch (e) {
+                    // ignore decode errors and continue
+                }
+
                 img.classList.remove('is-fading');
-            }, 300);
+            };
+
+            // Start periodic rotation
+            setInterval(showNext, 3500);
         };
 
-        setInterval(showNext, 3500);
+        // Try to decode the first preloaded image before starting (fast path),
+        // but don't wait more than 700ms to avoid long delays on slow connections.
+        (async () => {
+            try {
+                if (preloaded[0] && preloaded[0].decode) {
+                    await Promise.race([
+                        preloaded[0].decode(),
+                        new Promise((r) => setTimeout(r, 700))
+                    ]);
+                } else if (preloaded[0]) {
+                    // fallback if decode not available: wait for onload or timeout
+                    await Promise.race([
+                        new Promise((res) => { preloaded[0].onload = res; preloaded[0].onerror = res; }),
+                        new Promise((r) => setTimeout(r, 700))
+                    ]);
+                }
+            } catch (e) {
+                // ignore
+            }
+            startRotation();
+        })();
     });
    </script>
    
